@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const CoffeContainer = styled.div`
   width: 256px;
-  heigth: 310px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,6 +12,7 @@ export const CoffeContainer = styled.div`
   img {
     width: 120px;
     heigth: 120px;
+    margin-top: -20px;
   }
 
   h5 {
@@ -31,27 +31,32 @@ export const CoffeContainer = styled.div`
   }
 
   p {
-    margin-top: 0.5rem;
-    font-size: 14px;
+    max-width: 200px;
+    font-family: 'Roboto';
+    font-size: 12px;
     line-height: 130%;
     color: #8D8686;
     text-align: center;
+    margin-top: 0.8rem;
   }
 
   div {
     margin-top: 1.25rem; 
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
     gap: 1.25rem;
 
     span {
       color: #574F4D;
+      margin-top: -5px;
     }
 
     .addQuantity {
       background: #E6E5E5;
       padding: 8px;
       border-radius: 6px;
+      margin-top: -2px;
 
       button {
         font-size: 20px;
@@ -59,6 +64,13 @@ export const CoffeContainer = styled.div`
         border: none;
         color: #8047F8;
       }
+    }
+
+    .marketCar {
+      background: #4B2995;
+      padding: 8px;
+      border-radius: 6px;
+      margin-top: 0px;
     }
 
   }

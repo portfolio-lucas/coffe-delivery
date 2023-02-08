@@ -3,6 +3,10 @@ import { Header } from "../../components/Header";
 import { Items } from "../../components/Items";
 import { HomeContainer, IntroContainer } from "./style";
 import imageIntro from '../../assets/image-intro.svg';
+import TraditionalExpress from '../../assets/coffes/traditional-express.svg';
+import AmericanExpress from '../../assets/coffes/american-express.svg';
+import IcedExpress from '../../assets/coffes/iced-express.svg';
+
 import { Coffee, Package, ShoppingCart, Timer } from "phosphor-react";
 
 export function Home() {
@@ -48,9 +52,36 @@ export function Home() {
         
         </IntroContainer>
 
-      
-        <BoxCoffe />
+        <div className="coffes">
+          <h1>Nossos cafés</h1>
+          
+          <div>
+            <div className="grid">
+              <BoxCoffe 
+                icon={<img src={TraditionalExpress} alt="Expresso Tradicional" />}
+                type="Tradicional"
+                title="Expresso Tradicional"
+                description="O tradicional café feito com água quente e grãos moídos"
+                price="9,90" 
+              />
+              <BoxCoffe 
+                icon={<img src={AmericanExpress} alt="Expresso Americano" />}
+                type="Tradicional"
+                title="Expresso Americano"
+                description="Expresso diluído, menos intenso que o tradicional"
+                price="9,90" 
+              />
+              <BoxCoffe 
+                icon={<img src={IcedExpress} alt="Expresso" />}
+                type="Tradicional" 
+                title="Expresso Gelado"
+                description="Bebida preparada com café expresso e cubos de gelo"
+                price="9,90"
+              />
 
+            </div>
+          </div>
+        </div>
 
       </HomeContainer>
   )

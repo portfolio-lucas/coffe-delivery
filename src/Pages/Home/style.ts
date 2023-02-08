@@ -2,8 +2,24 @@ import styled from "styled-components";
 
 export const HomeContainer = styled.div`
   height: 100%;
-`
 
+  .coffes {
+    display: flex;
+    flex-direction: column;
+    margin-left: 150px;
+    
+    h1 {
+      margin-top: 2rem;
+      margin-bottom: 54px;
+      color: #403937;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+`
 export const IntroContainer = styled.div`
   display: flex;
   align-items: center;

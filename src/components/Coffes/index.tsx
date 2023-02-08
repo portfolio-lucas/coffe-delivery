@@ -1,9 +1,8 @@
 import { CoffeContainer } from "./style";
-import CoffeForBox from '../../assets/coffebox.svg'
-import { ReactElement } from "react";
+import { ShoppingCart } from "phosphor-react";
 
 interface ICoffe {
-  icon?: ReactElement;
+  icon?: HTMLOrSVGImageElement;
   type?: string;
   title?: string;
   description?: string;
@@ -12,25 +11,40 @@ interface ICoffe {
 }
 
 export function BoxCoffe({icon, type, title, description, quantity, price}: ICoffe) {
+  const handleIncrementQuantity = () => {
+    alert('+1');
+  }
+
+  const handleDecrementQauntity = () => {
+    alert('-1');
+  }
+
   return (
     <CoffeContainer>
-      <img src={CoffeForBox} alt="" />
+      <>
+        {icon}
 
-      <h5>TRADICIONAL</h5>
+        <h5>{type}</h5>
 
-      <h2>Expresso Tradicional</h2>
+        <h2>{title}</h2>
 
-      <p>O tradicional café feito com água quente e grãos moídos</p>
+        <p>{description}</p>
 
-      <div>
-        <span>R$ <strong>9,90</strong></span>
+        <div>
+          <span>R$ <strong>{price}</strong></span>
 
-        <div className="addQuantity">
-          <button>-</button>
-            1
-          <button>+</button>
+            <div className="addQuantity">
+              <button onClick={handleDecrementQauntity}>-</button>
+                1
+              <button onClick={handleIncrementQuantity}>+</button>
+            </div>
+
+            <div className="marketCar">
+              <ShoppingCart size={22} weight="bold" color="#fff" />
+            </div>
+          
         </div>
-      </div>
+      </>
     </CoffeContainer>
   )
 }
