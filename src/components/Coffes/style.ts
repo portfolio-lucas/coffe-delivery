@@ -75,3 +75,10 @@ export const CoffeContainer = styled.div`
 
   }
 `  
+
+export const  BtnCarCoffe = styled.button`
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+`

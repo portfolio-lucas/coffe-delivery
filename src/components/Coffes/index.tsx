@@ -1,23 +1,39 @@
-import { CoffeContainer } from "./style";
+import { BtnCarCoffe, CoffeContainer } from "./style";
 import { ShoppingCart } from "phosphor-react";
+import { ReactElement, useState } from "react";
+import { useQuantity } from "../../Hooks/UseQuantity/useQuantity";
 
 interface ICoffe {
-  icon?: HTMLOrSVGImageElement;
+  icon?: ReactElement;
   type?: string;
   title?: string;
   description?: string;
   quantity?: number;
-  price?: string;
+  price: number;
 }
 
 export function BoxCoffe({icon, type, title, description, quantity, price}: ICoffe) {
-  const handleIncrementQuantity = () => {
-    alert('+1');
-  }
+  const [productsInTheCart, setProductsInTheCart] = useState<ICoffe[]>([]);
 
-  const handleDecrementQauntity = () => {
-    alert('-1');
+  const { quantityCoffe, increaseTheQuantity, decreaseTheQuantity } = useQuantity();
+
+  let priceOfCoffe = price * quantityCoffe;
+
+  // função para adicionar o café no carrinho
+  const addCoffeInCar = () => {
+    const newCoffe: ICoffe = {
+      title,
+      description, 
+      type,
+      quantity,
+      price,
+      icon,
+    }
+
+    setProductsInTheCart([...productsInTheCart, newCoffe]);
   }
+  console.log(productsInTheCart);
+
 
   return (
     <CoffeContainer>
@@ -31,18 +47,19 @@ export function BoxCoffe({icon, type, title, description, quantity, price}: ICof
         <p>{description}</p>
 
         <div>
-          <span>R$ <strong>{price}</strong></span>
+          <span>R$ <strong>{priceOfCoffe.toFixed(2)}</strong></span>
 
             <div className="addQuantity">
-              <button onClick={handleDecrementQauntity}>-</button>
-                1
-              <button onClick={handleIncrementQuantity}>+</button>
+              <button disabled={quantityCoffe === 1} onClick={decreaseTheQuantity}>-</button>
+                {quantityCoffe}
+              <button onClick={increaseTheQuantity}>+</button>
             </div>
 
             <div className="marketCar">
-              <ShoppingCart size={22} weight="bold" color="#fff" />
+              <BtnCarCoffe onClick={addCoffeInCar}>
+                <ShoppingCart size={22} weight="bold" color="#fff" />
+              </BtnCarCoffe>
             </div>
-          
         </div>
       </>
     </CoffeContainer>

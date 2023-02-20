@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import { ItemContainer } from "./style";
+import { BoxItem, ItemContainer } from "./style";
 
 interface IItems {
   icon?: ReactElement;
@@ -9,7 +9,9 @@ interface IItems {
 export function Items({icon, description}: IItems) {
   return (
     <ItemContainer>
-      {icon}
+      <BoxItem>
+        {icon}
+      </BoxItem>
 
       <p>{description}</p>
     </ItemContainer>

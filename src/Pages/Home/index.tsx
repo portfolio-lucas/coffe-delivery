@@ -25,23 +25,23 @@ export function Home() {
             <div className="items">
               <div className="item">
                 <Items 
-                  icon={<ShoppingCart size={22} weight="bold" color="orange" />} 
+                  icon={<ShoppingCart size={22} weight="bold" color="white" />} 
                   description="Compra simples e segura" 
                 />
 
                 <Items 
-                  icon={<Package size={22} weight="bold" color="#574F4D" />}
+                  icon={<Package size={22} weight="bold" color="white" />}
                   description="Embalagem mantém o café intacto" 
                 />
               </div>
 
               <div className="item">
                 <Items 
-                  icon={<Timer size={22} weight="bold" color="#DBAC2C" />}
+                  icon={<Timer size={22} weight="bold" color="white" />}
                   description="Entrega rápida e rastreada" 
                 />
                 <Items 
-                  icon={<Coffee size={22} weight="bold" color="#8047F8" />}
+                  icon={<Coffee size={22} weight="bold" color="white" />}
                   description="O café chega fresquinho até você" 
                 />
               </div>
@@ -62,23 +62,22 @@ export function Home() {
                 type="Tradicional"
                 title="Expresso Tradicional"
                 description="O tradicional café feito com água quente e grãos moídos"
-                price="9,90" 
+                price={9.90} 
               />
               <BoxCoffe 
                 icon={<img src={AmericanExpress} alt="Expresso Americano" />}
                 type="Tradicional"
                 title="Expresso Americano"
                 description="Expresso diluído, menos intenso que o tradicional"
-                price="9,90" 
+                price={9.90}
               />
               <BoxCoffe 
                 icon={<img src={IcedExpress} alt="Expresso" />}
                 type="Tradicional" 
                 title="Expresso Gelado"
                 description="Bebida preparada com café expresso e cubos de gelo"
-                price="9,90"
+                price={9.90}
               />
-
             </div>
           </div>
         </div>
