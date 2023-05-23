@@ -34,6 +34,14 @@ export const CompleteOrder = styled.div`
     color: #574F4D;
   }
 
+  .errorMessage {
+    color: #B40404;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    margin-left: 2px;
+  }
+
   input {
     padding: 12px;
     border: 1px solid #E6E5E5;

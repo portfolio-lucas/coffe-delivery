@@ -11,7 +11,6 @@ export const CoffeContainer = styled.div`
 
   img {
     width: 120px;
-    heigth: 120px;
     margin-top: -20px;
   }
 
@@ -21,6 +20,8 @@ export const CoffeContainer = styled.div`
     color: #C47F17;
     padding: 4px 8px;
     border-radius: 100px;
+    display: flex;
+    align-items: center;
   }
 
   h2 {
@@ -71,6 +72,7 @@ export const CoffeContainer = styled.div`
       padding: 8px;
       border-radius: 6px;
       margin-top: 0px;
+      cursor: pointer;
     }
 
   }
