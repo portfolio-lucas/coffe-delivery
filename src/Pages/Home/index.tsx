@@ -28,12 +28,8 @@ export default function Home() {
             {guarantees &&
               guarantees.map((item) => {
                 return (
-                  <div className="item">
-                    <Items
-                      key={item.id}
-                      icon={item.icon}
-                      description={item.content}
-                    />
+                  <div key={item.id} className="item">
+                    <Items icon={item.icon} description={item.content} />
                   </div>
                 );
               })}
@@ -50,14 +46,16 @@ export default function Home() {
           {coffes &&
             coffes.map((item) => {
               return (
-                <BoxCoffe
-                  key={item.id}
-                  icon={item.icon}
-                  type={item.type}
-                  title={item.title}
-                  description={item.description}
-                  price={item.price}
-                />
+                <div key={item.id}>
+                  <BoxCoffe
+                    id={item.id}
+                    icon={item.icon}
+                    types={item.types}
+                    title={item.title}
+                    description={item.description}
+                    price={item.price}
+                  />
+                </div>
               );
             })}
         </div>

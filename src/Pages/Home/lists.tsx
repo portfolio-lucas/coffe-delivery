@@ -34,10 +34,15 @@ export const guarantees: GuaranteesProps[] = [
   },
 ];
 
+interface TypesProps {
+  id: number;
+  description: string;
+}
+
 interface CoffesProps {
   id: number;
   icon?: ReactElement;
-  type?: string[];
+  types?: TypesProps[];
   title?: string;
   description?: string;
   quantity?: number;
@@ -48,7 +53,12 @@ export const coffes: CoffesProps[] = [
   {
     id: 1,
     icon: <img src={TraditionalExpress} alt="Expresso Tradicional" />,
-    type: ["Tradicional"],
+    types: [
+      {
+        id: 1,
+        description: "Tradicional",
+      },
+    ],
     title: "Expresso Tradicional",
     description: "O tradicional café feito com água quente e grãos moídos",
     price: 9.9,
@@ -56,7 +66,12 @@ export const coffes: CoffesProps[] = [
   {
     id: 2,
     icon: <img src={AmericanExpress} alt="Expresso Americano" />,
-    type: ["Americano"],
+    types: [
+      {
+        id: 2,
+        description: "Americano",
+      },
+    ],
     title: "Expresso Americano",
     description: "O expresso americano feito com água quente e grãos moídos",
     price: 9.9,
@@ -64,7 +79,12 @@ export const coffes: CoffesProps[] = [
   {
     id: 3,
     icon: <img src={IcedExpress} alt="Expresso" />,
-    type: ["Tradicional"],
+    types: [
+      {
+        id: 3,
+        description: "Gelado",
+      },
+    ],
     title: "Expresso Gelado",
     description: "O expresso gelado feito com água quente e grãos moídos",
     price: 9.9,
@@ -72,7 +92,12 @@ export const coffes: CoffesProps[] = [
   {
     id: 4,
     icon: <img src={TraditionalExpress} alt="Expresso Tradicional" />,
-    type: ["Tradicional"],
+    types: [
+      {
+        id: 4,
+        description: "Tradicional",
+      },
+    ],
     title: "Expresso Tradicional",
     description: "O tradicional café feito com água quente e grãos moídos",
     price: 9.9,
@@ -80,7 +105,16 @@ export const coffes: CoffesProps[] = [
   {
     id: 5,
     icon: <img src={TraditionalExpress} alt="Café com leite" />,
-    type: ["Tradicional", "Com leite"],
+    types: [
+      {
+        id: 5,
+        description: "Tradicional",
+      },
+      {
+        id: 6,
+        description: "Com leite",
+      },
+    ],
     title: "Café com Leite",
     description: "Meio a meio de expresso tradicional com leite vaporizado",
     price: 9.9,
@@ -88,28 +122,72 @@ export const coffes: CoffesProps[] = [
   {
     id: 6,
     icon: <img src={TraditionalExpress} alt="Latte" />,
-    type: ["Tradicional", "Com leite"],
+    types: [
+      {
+        id: 7,
+        description: "Tradicional",
+      },
+      {
+        id: 8,
+        description: "Com leite",
+      },
+    ],
     title: "Latte",
     description:
       "Uma dose de café expresso com dobro de leite e espuma cremosa",
     price: 9.9,
   },
   {
-    id: 6,
+    id: 7,
     icon: <img src={TraditionalExpress} alt="Capuccino" />,
-    type: ["Tradicional", "Com leite"],
+    types: [
+      {
+        id: 9,
+        description: "Tradicional",
+      },
+      {
+        id: 10,
+        description: "Com leite",
+      },
+    ],
     title: "Capuccino",
     description:
       "Bebida com canela feita de doses iguais de café, leite e espuma",
     price: 9.9,
   },
   {
-    id: 7,
+    id: 8,
     icon: <img src={TraditionalExpress} alt="Macchiato" />,
-    type: ["Tradicional", "Com leite"],
+    types: [
+      {
+        id: 11,
+        description: "Tradicional",
+      },
+      {
+        id: 12,
+        description: "Com leite",
+      },
+    ],
     title: "Macchiato",
     description:
       "Café expresso misturado com um pouco de leite quente e espuma",
+    price: 9.9,
+  },
+  {
+    id: 9,
+    icon: <img src={TraditionalExpress} alt="Mocaccino" />,
+    types: [
+      {
+        id: 13,
+        description: "Tradicional",
+      },
+      {
+        id: 14,
+        description: "Com leite",
+      },
+    ],
+    title: "Mocaccino",
+    description: "Café expresso com calda de chocolate, pouco leite e espuma",
     price: 9.9,
   },
 ];

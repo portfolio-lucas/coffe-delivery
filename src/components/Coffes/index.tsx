@@ -1,11 +1,17 @@
-import { BtnCarCoffe, CoffeContainer } from "./style";
+import { BtnCarCoffe, CoffeContainer, TypesBox } from "./style";
 import { ShoppingCart } from "phosphor-react";
 import { ReactElement, useState } from "react";
 import { useQuantity } from "../../Hooks/UseQuantity/useQuantity";
 
-interface ICoffe {
+interface TypesProps {
+  id: number;
+  description: string;
+}
+
+interface CoffesProps {
+  id: number;
   icon?: ReactElement;
-  type?: string[];
+  types?: TypesProps[];
   title?: string;
   description?: string;
   quantity?: number;
@@ -13,14 +19,15 @@ interface ICoffe {
 }
 
 export function BoxCoffe({
+  id,
   icon,
-  type,
+  types,
   title,
   description,
   quantity,
   price,
-}: ICoffe) {
-  const [productsInTheCart, setProductsInTheCart] = useState<ICoffe[]>([]);
+}: CoffesProps) {
+  const [productsInTheCart, setProductsInTheCart] = useState<CoffesProps[]>([]);
 
   const { quantityCoffe, increaseTheQuantity, decreaseTheQuantity } =
     useQuantity();
@@ -29,9 +36,10 @@ export function BoxCoffe({
 
   // função para adicionar o café no carrinho
   const addCoffeInCar = () => {
-    const newCoffe: ICoffe = {
+    const newCoffe: CoffesProps = {
+      id,
       icon,
-      type,
+      types,
       title,
       description,
       quantity,
@@ -47,20 +55,24 @@ export function BoxCoffe({
         {icon}
 
         <div style={{ display: "flex" }}>
-          {type &&
-            type.length > 0 &&
-            type.map((item) => {
-              return <h5>{item}</h5>;
+          {types &&
+            types.length > 0 &&
+            types.map((item) => {
+              return (
+                <TypesBox key={item.id}>
+                  <h5>{item.description}</h5>
+                </TypesBox>
+              );
             })}
         </div>
 
         <h2>{title}</h2>
 
-        <p>{description}</p>
+        <p style={{ fontFamily: "Roboto" }}>{description}</p>
 
         <div>
           <span>
-            R$ <strong>{priceOfCoffe.toFixed(2)}</strong>
+            R$ <strong>{priceOfCoffe.toFixed(2).replace(".", ",")}</strong>
           </span>
 
           <div className="addQuantity">
@@ -70,7 +82,7 @@ export function BoxCoffe({
             >
               -
             </button>
-            {quantityCoffe}
+            <span>{quantityCoffe}</span>
             <button onClick={increaseTheQuantity}>+</button>
           </div>
 

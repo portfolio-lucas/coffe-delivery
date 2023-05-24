@@ -14,15 +14,7 @@ export const CoffeContainer = styled.div`
     margin-top: -20px;
   }
 
-  h5 {
-    margin-top: 0.75rem;
-    background: #F1E9C9;
-    color: #C47F17;
-    padding: 4px 8px;
-    border-radius: 100px;
-    display: flex;
-    align-items: center;
-  }
+  
 
   h2 {
     font-size: 20px;
@@ -58,12 +50,18 @@ export const CoffeContainer = styled.div`
       padding: 8px;
       border-radius: 6px;
       margin-top: -2px;
+      
 
       button {
         font-size: 20px;
         background: none;
         border: none;
         color: #8047F8;
+      }
+
+      span {
+        margin-top: 3px;
+        color: #000;
       }
     }
 
@@ -72,15 +70,29 @@ export const CoffeContainer = styled.div`
       padding: 8px;
       border-radius: 6px;
       margin-top: 0px;
-      cursor: pointer;
     }
 
   }
 `  
+export const TypesBox = styled.div`
+    margin-top: 0.75rem;
+    background: #F1E9C9;
+    padding: 4px 8px;
+    border-radius: 100px;
+
+    h5 {
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    color: #C47F17;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+`
 
 export const  BtnCarCoffe = styled.button`
   background: none;
   border: none;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `
