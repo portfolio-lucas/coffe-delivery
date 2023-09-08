@@ -1,7 +1,14 @@
-import { BtnCarCoffe, CoffeContainer, TypesBox } from "./style";
+import {
+  BtnCarCoffe,
+  CoffeContainer,
+  DecrementButton,
+  IncrementButton,
+  TypesBox,
+} from "./style";
 import { ShoppingCart } from "phosphor-react";
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 import { useQuantity } from "../../Hooks/UseQuantity/useQuantity";
+import { ProductsContext } from "../../context/Products/ProductsContext";
 
 interface TypesProps {
   id: number;
@@ -30,6 +37,8 @@ export function BoxCoffe({
   const { quantityCoffe, increaseTheQuantity, decreaseTheQuantity } =
     useQuantity();
 
+  const { addProductToShortlist } = useContext(ProductsContext);
+
   let priceOfCoffe = price * quantityCoffe;
 
   // função para adicionar o café no carrinho
@@ -40,9 +49,11 @@ export function BoxCoffe({
       types,
       title,
       description,
-      quantity,
-      price,
+      quantity: quantityCoffe,
+      price: priceOfCoffe,
     };
+
+    addProductToShortlist(newCoffe);
   };
 
   return (
@@ -75,14 +86,14 @@ export function BoxCoffe({
           </div>
 
           <div className="addQuantity">
-            <button
+            <DecrementButton
               disabled={quantityCoffe === 1}
               onClick={decreaseTheQuantity}
             >
               -
-            </button>
+            </DecrementButton>
             <span>{quantityCoffe}</span>
-            <button onClick={increaseTheQuantity}>+</button>
+            <IncrementButton onClick={increaseTheQuantity}>+</IncrementButton>
           </div>
 
           <div className="marketCar">

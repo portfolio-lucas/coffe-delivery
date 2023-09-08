@@ -61,18 +61,6 @@ export const CoffeContainer = styled.div`
       padding: 10px;
       border-radius: 6px;
       margin-top: -2px;
-      
-      button {
-        font-size: 20px;
-        background: none;
-        border: none;
-        color: #8047F8;
-        cursor: pointer;
-
-        :hover {
-          background-color: #D8D8D8;
-        }
-      }
 
       span {
         margin-top: 3px;
@@ -105,6 +93,30 @@ export const TypesBox = styled.div`
     color: #C47F17;
     font-weight: 700;
     margin-top: 2px;
+  }
+`
+
+export const IncrementButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #8047F8;
+
+  :hover {
+    background-color: #D8D8D8;
+  }
+`
+
+export const DecrementButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #8047F8;
+
+  :hover {
+    background-color: #D8D8D8;
   }
 `
 
