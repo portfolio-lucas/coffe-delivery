@@ -27,8 +27,6 @@ export function BoxCoffe({
   quantity,
   price,
 }: CoffesProps) {
-  const [productsInTheCart, setProductsInTheCart] = useState<CoffesProps[]>([]);
-
   const { quantityCoffe, increaseTheQuantity, decreaseTheQuantity } =
     useQuantity();
 
@@ -45,8 +43,6 @@ export function BoxCoffe({
       quantity,
       price,
     };
-
-    setProductsInTheCart([...productsInTheCart, newCoffe]);
   };
 
   return (
@@ -71,9 +67,12 @@ export function BoxCoffe({
         <p style={{ fontFamily: "Roboto" }}>{description}</p>
 
         <div>
-          <span>
-            R$ <strong>{priceOfCoffe.toFixed(2).replace(".", ",")}</strong>
-          </span>
+          <div className="priceCoffe">
+            <span>R$</span>
+            <span className="price">
+              <strong>{priceOfCoffe.toFixed(2).replace(".", ",")}</strong>
+            </span>
+          </div>
 
           <div className="addQuantity">
             <button

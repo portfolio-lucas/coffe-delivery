@@ -38,30 +38,45 @@ export const CoffeContainer = styled.div`
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.2rem;
 
-    span {
-      color: #574F4D;
-      margin-top: -5px;
+
+    .priceCoffe {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+
+      span {
+        color: #574F4D;
+        margin-top: -15px;
+      }
+
+      .price {
+        width: 2%;
+      }
     }
 
     .addQuantity {
       background: #E6E5E5;
-      padding: 8px;
+      padding: 10px;
       border-radius: 6px;
       margin-top: -2px;
       
-
       button {
         font-size: 20px;
         background: none;
         border: none;
         color: #8047F8;
+        cursor: pointer;
+
+        :hover {
+          background-color: #D8D8D8;
+        }
       }
 
       span {
         margin-top: 3px;
-        color: #000;
+        font-weight: 600;
       }
     }
 
@@ -70,6 +85,10 @@ export const CoffeContainer = styled.div`
       padding: 8px;
       border-radius: 6px;
       margin-top: 0px;
+
+      :hover {
+        background-color: #210B61;
+      }
     }
 
   }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { BoxCoffe } from "../../components/Coffes";
 import { Header } from "../../components/Header";
@@ -6,9 +6,12 @@ import { Items } from "../../components/Items";
 import { HomeContainer, IntroContainer } from "./style";
 import imageIntro from "../../assets/image-intro.svg";
 
-import { guarantees, coffes } from "../Home/lists";
+import { guarantees } from "../Home/lists";
+import { ProductsContext } from "../../context/Products/ProductsContext";
 
 export default function Home() {
+  const { products } = useContext(ProductsContext);
+
   return (
     <HomeContainer>
       <Header />
@@ -43,17 +46,17 @@ export default function Home() {
         <h1>Nossos cafés</h1>
 
         <div className="grid">
-          {coffes &&
-            coffes.map((item) => {
+          {products &&
+            products.map((product) => {
               return (
-                <div key={item.id}>
+                <div key={product.id}>
                   <BoxCoffe
-                    id={item.id}
-                    icon={item.icon}
-                    types={item.types}
-                    title={item.title}
-                    description={item.description}
-                    price={item.price}
+                    id={product.id}
+                    icon={product.icon}
+                    types={product.types}
+                    title={product.title}
+                    description={product.description}
+                    price={product.price}
                   />
                 </div>
               );

@@ -39,7 +39,7 @@ interface TypesProps {
   description: string;
 }
 
-interface CoffesProps {
+export interface CoffesProps {
   id: number;
   icon?: ReactElement;
   types?: TypesProps[];
