@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { CoffesProps, coffes } from "../../Pages/Home/lists";
 
 export interface ProductsContextProps {
@@ -6,6 +6,8 @@ export interface ProductsContextProps {
   chosenProducts: CoffesProps[];
   addProductToShortlist: (product: CoffesProps) => void;
   removeProductToShortlist: (product: CoffesProps) => void;
+  removeAllProductsToShortList: () => void;
+  calcTotalValue: () => number;
 }
 
 export interface ProductsContextProviderProps {
@@ -36,9 +38,26 @@ export function ProductsProvider({ children }: ProductsContextProviderProps) {
     setChosenProducts(newList);
   };
 
+  const removeAllProductsToShortList = () => {
+    setChosenProducts([]);
+  };
+
+  const calcTotalValue = useCallback(() => {
+    let values: number[] = [];
+    let totalValue: number = 0;
+
+    chosenProducts.forEach((item) => {
+      values.push(item.price);
+    });
+
+    totalValue = values.reduce((a, b) => a + b, 0);
+
+    return totalValue;
+  }, [chosenProducts]);
+
   useEffect(() => {
     setProducts(coffes);
-  });
+  }, [products]);
 
   return (
     <ProductsContext.Provider
@@ -47,6 +66,8 @@ export function ProductsProvider({ children }: ProductsContextProviderProps) {
         chosenProducts,
         addProductToShortlist,
         removeProductToShortlist,
+        removeAllProductsToShortList,
+        calcTotalValue,
       }}
     >
       {children}

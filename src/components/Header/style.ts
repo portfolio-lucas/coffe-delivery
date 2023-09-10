@@ -37,6 +37,10 @@ export const CarButton = styled.button`
   width: 38px;
   height: 38px;
   border-radius: 6px;
+
+  :hover {
+    background-color: #F5DA81;
+  }
 `
 
 export const QuantityInCart = styled.div`
@@ -62,11 +66,10 @@ export const CartModal = styled.div`
   .DialogContent {
     background-color: white;
     display: flex;
-    justify-content: space-between;
     border-radius: 6px;
     box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
     position: fixed;
-    top: 18%;
+    top: 20%;
     left: 72%;
     transform: translate(-50%, -50%);
     width: 90vw;
@@ -90,7 +93,7 @@ export const CloseModal = styled.button`
     justify-content: center;
     position: absolute;
     top: 10px;
-    left: 87%;
+    left: 90%;
 
     &:hover {
       background: #EBE5F9;
