@@ -20,12 +20,25 @@ export function ProductsProvider({ children }: ProductsContextProviderProps) {
   const [products, setProducts] = useState<CoffesProps[] | []>([]);
   const [chosenProducts, setChosenProducts] = useState<CoffesProps[] | []>([]);
 
+  const updateProductToShortList = (product: CoffesProps) => {
+    chosenProducts.find((item) => {
+      const updatedProduct = item.id === product.id;
+
+      if (updatedProduct) {
+        item.quantity = product.quantity;
+        item.price = product.price;
+      }
+    });
+  };
+
   const addProductToShortlist = (product: CoffesProps) => {
     const filterIfProductIsInTheList = chosenProducts.filter(
       (item) => item.id === product.id
     );
 
     if (filterIfProductIsInTheList.length > 0) {
+      updateProductToShortList(product);
+
       setChosenProducts([...chosenProducts]);
     } else {
       setChosenProducts([...chosenProducts, product]);
