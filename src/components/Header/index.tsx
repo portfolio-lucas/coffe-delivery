@@ -49,7 +49,7 @@ export function Header() {
 
                 <Dialog.Close asChild>
                   <CloseModal aria-label="Close">
-                    <XCircle size={20} color="#000" />
+                    <XCircle size={22} color="#000" />
                   </CloseModal>
                 </Dialog.Close>
               </Dialog.Content>
