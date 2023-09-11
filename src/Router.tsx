@@ -11,7 +11,7 @@ export function Router() {
         <Route path="/" element={<Header />} />
       </Route>
 
-      <Route path="/checkout" element={<Checkout />} />
+      <Route path="/checkout/:id" element={<Checkout />} />
     </Routes>
   );
 }
