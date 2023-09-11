@@ -1,6 +1,10 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 import { CoffesProps, coffes } from "../../Pages/Home/lists";
 
+export interface ProductsContextProviderProps {
+  children: React.ReactNode;
+}
+
 export interface ProductsContextProps {
   products: CoffesProps[];
   chosenProducts: CoffesProps[];
@@ -8,10 +12,6 @@ export interface ProductsContextProps {
   removeProductToShortlist: (product: CoffesProps) => void;
   removeAllProductsToShortList: () => void;
   calcTotalValue: () => number;
-}
-
-export interface ProductsContextProviderProps {
-  children: React.ReactNode;
 }
 
 export const ProductsContext = createContext({} as ProductsContextProps);
@@ -29,6 +29,8 @@ export function ProductsProvider({ children }: ProductsContextProviderProps) {
         item.price = product.price;
       }
     });
+
+    setChosenProducts([...chosenProducts]);
   };
 
   const addProductToShortlist = (product: CoffesProps) => {
@@ -38,8 +40,6 @@ export function ProductsProvider({ children }: ProductsContextProviderProps) {
 
     if (filterIfProductIsInTheList.length > 0) {
       updateProductToShortList(product);
-
-      setChosenProducts([...chosenProducts]);
     } else {
       setChosenProducts([...chosenProducts, product]);
     }
