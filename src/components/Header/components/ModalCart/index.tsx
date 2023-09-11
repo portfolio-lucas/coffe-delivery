@@ -13,6 +13,7 @@ import { useContext, useEffect } from "react";
 import { ProductsContext } from "../../../../context/Products/ProductsContext";
 import { XCircle } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
+import { OrderContext } from "../../../../context/Order/OrderContext";
 
 export function ModalCart() {
   const {
@@ -22,10 +23,14 @@ export function ModalCart() {
     calcTotalValue,
   } = useContext(ProductsContext);
 
+  const { generateOrderId } = useContext(OrderContext);
+
   const navigate = useNavigate();
 
   const navigateToProgress = () => {
-    navigate("/checkout");
+    const orderId = generateOrderId();
+
+    navigate(`/checkout/${orderId}`);
   };
 
   useEffect(() => {
