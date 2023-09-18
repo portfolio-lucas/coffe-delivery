@@ -1,36 +1,95 @@
-import { CoffeContainer } from "./style";
-import CoffeForBox from '../../assets/coffebox.svg'
-import { ReactElement } from "react";
+import {
+  BtnCarCoffe,
+  CoffeContainer,
+  DecrementButton,
+  IncrementButton,
+  TypesBox,
+} from "./style";
+import { ShoppingCart } from "phosphor-react";
+import { ReactElement, useContext } from "react";
+import { useQuantity } from "../../Hooks/UseQuantity/useQuantity";
+import { ProductsContext } from "../../context/Products/ProductsContext";
+import { OrderContext } from "../../context/Order/OrderContext";
+import { CoffesProps } from "../../Pages/Home/lists";
 
-interface ICoffe {
-  icon?: ReactElement;
-  type?: string;
-  title?: string;
-  description?: string;
-  quantity?: number;
-  price?: string;
+interface TypesProps {
+  id: number;
+  description: string;
 }
 
-export function BoxCoffe({icon, type, title, description, quantity, price}: ICoffe) {
+interface BoxCoffeProps {
+  coffe: CoffesProps;
+  quantity: number;
+}
+
+export function BoxCoffe({ coffe, quantity }: BoxCoffeProps) {
+  const { quantityCoffe, increaseTheQuantity, decreaseTheQuantity } =
+    useQuantity({
+      quantity,
+    });
+
+  let newPrice = coffe.price * quantityCoffe;
+
+  const { order } = useContext(OrderContext);
+  const { addProductToShortlist } = useContext(ProductsContext);
+
   return (
     <CoffeContainer>
-      <img src={CoffeForBox} alt="" />
+      <>
+        {coffe.icon}
 
-      <h5>TRADICIONAL</h5>
-
-      <h2>Expresso Tradicional</h2>
-
-      <p>O tradicional café feito com água quente e grãos moídos</p>
-
-      <div>
-        <span>R$ <strong>9,90</strong></span>
-
-        <div className="addQuantity">
-          <button>-</button>
-            1
-          <button>+</button>
+        <div style={{ display: "flex" }}>
+          {coffe.types &&
+            coffe.types.length > 0 &&
+            coffe.types.map((item) => {
+              return (
+                <TypesBox key={item.id}>
+                  <h5>{item.description}</h5>
+                </TypesBox>
+              );
+            })}
         </div>
-      </div>
+
+        <h2>{coffe.title}</h2>
+
+        <p style={{ fontFamily: "Roboto" }}>{coffe.description}</p>
+
+        <div>
+          <div className="priceCoffe">
+            <span>R$</span>
+            <span className="price">
+              <strong>{newPrice.toFixed(2).replace(".", ",")}</strong>
+            </span>
+          </div>
+
+          <div className="addQuantity">
+            <DecrementButton
+              disabled={quantityCoffe === 1}
+              onClick={() => decreaseTheQuantity()}
+            >
+              -
+            </DecrementButton>
+            <span>{quantityCoffe}</span>
+            <IncrementButton onClick={() => increaseTheQuantity()}>
+              +
+            </IncrementButton>
+          </div>
+
+          <div className="marketCar">
+            <BtnCarCoffe
+              onClick={() =>
+                addProductToShortlist({
+                  ...coffe,
+                  quantity: quantityCoffe,
+                  price: newPrice,
+                })
+              }
+            >
+              <ShoppingCart size={22} weight="bold" color="#fff" />
+            </BtnCarCoffe>
+          </div>
+        </div>
+      </>
     </CoffeContainer>
-  )
+  );
 }
