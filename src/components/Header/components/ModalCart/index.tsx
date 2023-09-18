@@ -14,23 +14,25 @@ import { ProductsContext } from "../../../../context/Products/ProductsContext";
 import { XCircle } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import { OrderContext } from "../../../../context/Order/OrderContext";
+import { CloseModal } from "../../style";
 
 export function ModalCart() {
   const {
-    chosenProducts,
     removeProductToShortlist,
     removeAllProductsToShortList,
     calcTotalValue,
   } = useContext(ProductsContext);
 
-  const { generateOrderId } = useContext(OrderContext);
+  const { order } = useContext(OrderContext);
 
   const navigate = useNavigate();
 
   const navigateToProgress = () => {
-    const orderId = generateOrderId();
+    if (order) {
+      const orderId = order.id;
 
-    navigate(`/checkout/${orderId}`);
+      navigate(`/checkout/${orderId}/finished`);
+    }
   };
 
   useEffect(() => {
@@ -39,25 +41,27 @@ export function ModalCart() {
 
   return (
     <ModalContainer>
-      {chosenProducts.length === 0 && (
-        <p style={{ fontWeight: "bold" }}>Seu carrinho está vazio</p>
-      )}
+      <div>
+        {order && order.chosenProducts.length === 0 && (
+          <p style={{ fontWeight: "bold" }}>Seu carrinho está vazio</p>
+        )}
 
-      {chosenProducts && chosenProducts.length > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-          <table>
-            <thead>
-              <Tr>
-                <Th style={{ minWidth: "35%" }}>Nome</Th>
-                <Th style={{ minWidth: "8%" }}>Qtd</Th>
-                <Th style={{ minWidth: "14%" }}>Preço</Th>
-                <Th />
-              </Tr>
-            </thead>
+        {order && order.chosenProducts && order.chosenProducts.length > 0 && (
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+          >
+            <div>
+              <div>
+                <Tr>
+                  <Th style={{ minWidth: "35%" }}>Nome</Th>
+                  <Th style={{ minWidth: "8%" }}>Qtd</Th>
+                  <Th style={{ minWidth: "14%" }}>Preço</Th>
+                  <Th />
+                </Tr>
+              </div>
 
-            <tbody>
               <ShoppingListContainer>
-                {chosenProducts.map((product) => {
+                {order.chosenProducts.map((product) => {
                   return (
                     <div key={product.id}>
                       <Tr>
@@ -81,35 +85,41 @@ export function ModalCart() {
                   );
                 })}
               </ShoppingListContainer>
-            </tbody>
-          </table>
+            </div>
 
-          {chosenProducts.length >= 2 && (
-            <RemoveAllItems onClick={removeAllProductsToShortList}>
-              Limpar carrinho
-            </RemoveAllItems>
-          )}
+            {order.chosenProducts.length >= 2 && (
+              <RemoveAllItems onClick={removeAllProductsToShortList}>
+                Limpar carrinho
+              </RemoveAllItems>
+            )}
 
-          <div style={{ border: "1px solid black" }} />
+            <div style={{ border: "1px solid black" }} />
 
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <div>
-              <p>
-                Total:{" "}
-                <strong>
-                  R$ {calcTotalValue().toFixed(2).replace(".", ",")}
-                </strong>
-              </p>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <div>
+                <p>
+                  Total:{" "}
+                  <strong>
+                    R$ {calcTotalValue().toFixed(2).replace(".", ",")}
+                  </strong>
+                </p>
 
-              <div style={{ marginTop: "8%" }}>
-                <ProgressButton onClick={navigateToProgress}>
-                  Prosseguir
-                </ProgressButton>
+                <div style={{ marginTop: "8%" }}>
+                  <ProgressButton onClick={navigateToProgress}>
+                    Prosseguir
+                  </ProgressButton>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+
+      <Dialog.Close asChild>
+        <CloseModal aria-label="Close">
+          <XCircle size={22} color="#000" />
+        </CloseModal>
+      </Dialog.Close>
     </ModalContainer>
   );
 }

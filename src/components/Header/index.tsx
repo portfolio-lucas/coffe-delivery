@@ -4,22 +4,17 @@ import {
   CarButton,
   QuantityInCart,
   Location,
-  CartModal,
-  CloseModal,
 } from "./style";
 import CoffeDelivery from "../../assets/coffe-delivery.svg";
-import { MapPin, ShoppingCart, XCircle } from "phosphor-react";
+import { MapPin, ShoppingCart } from "phosphor-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { ModalCart } from "./components/ModalCart";
-import { useContext } from "react";
-import { ProductsContext } from "../../context/Products/ProductsContext";
+import { useContext, useState } from "react";
+import { OrderContext } from "../../context/Order/OrderContext";
 
 export function Header() {
-  const { chosenProducts } = useContext(ProductsContext);
-
-  const handleOpenShoppingListModal = () => {
-    console.log("open shopping list");
-  };
+  const { order } = useContext(OrderContext);
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <HeaderContainer>
@@ -31,29 +26,31 @@ export function Header() {
           <span>João Pessoa-PB</span>
         </Location>
 
-        <Dialog.Root>
+        <Dialog.Root
+          modal
+          open={openModal}
+          onOpenChange={() => {
+            if (order) {
+              setOpenModal(!openModal);
+            }
+          }}
+        >
           <Dialog.Trigger asChild>
-            <CarButton onClick={handleOpenShoppingListModal}>
+            <CarButton>
               <ShoppingCart size={22} color="orange" />
-              <QuantityInCart>
-                <p>{chosenProducts.length}</p>
-              </QuantityInCart>
+              {order && (
+                <QuantityInCart>
+                  <p>{order.chosenProducts.length}</p>
+                </QuantityInCart>
+              )}
             </CarButton>
           </Dialog.Trigger>
 
           <Dialog.Portal>
             <Dialog.Overlay className="DialogOverlay" />
-            <CartModal>
-              <Dialog.Content className="DialogContent">
-                <ModalCart />
-
-                <Dialog.Close asChild>
-                  <CloseModal aria-label="Close">
-                    <XCircle size={22} color="#000" />
-                  </CloseModal>
-                </Dialog.Close>
-              </Dialog.Content>
-            </CartModal>
+            <Dialog.Content>
+              <ModalCart />
+            </Dialog.Content>
           </Dialog.Portal>
         </Dialog.Root>
       </ContentMain>

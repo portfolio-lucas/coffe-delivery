@@ -1,14 +1,27 @@
 import styled from "styled-components";
 
 export const ModalContainer = styled.div`
-  display: flex;
-  align-items: center;
+  background-color: white;
+    display: flex;
+    border-radius: 6px;
+    box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+    position: fixed;
+    top: 20%;
+    left: 72%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 340px;
+    max-height: 85vh;
+    padding: 25px;
+    z-index: 999px;
+    animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 `
 
 export const ShoppingListContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 15px;
   gap: 0.5rem;
 `
 
