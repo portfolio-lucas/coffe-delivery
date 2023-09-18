@@ -21,6 +21,7 @@ import { OrderContext } from "../../context/Order/OrderContext";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../../context/Products/ProductsContext";
 import Item from "./Item";
+import { useNavigate } from "react-router-dom";
 
 const validation = yup
   .object({
@@ -52,6 +53,7 @@ export function Checkout() {
   } = useForm<FormData>({
     resolver: yupResolver(validation),
   });
+  const navigate = useNavigate();
   const [deliveryPrice, setDeliveryPrice] = useState(3.3);
   const [totalOrderPrice, setTotalOrderPrice] = useState(0);
   const onSubmit = (data: FormData) => console.log(data);
@@ -59,6 +61,12 @@ export function Checkout() {
   const { order } = useContext(OrderContext);
 
   const { calcTotalValue } = useContext(ProductsContext);
+
+  const navigateToConfirmOrder = () => {
+    if (order) {
+      navigate(`/order/${order.id}/success`);
+    }
+  };
 
   const calcTotalOrderPrice = useCallback(() => {
     const totalValue = calcTotalValue();
@@ -241,7 +249,9 @@ export function Checkout() {
                 </TextPrice>
               </OrderTotalItems>
 
-              <ConfirmOrderButton>CONFIRMAR PEDIDO</ConfirmOrderButton>
+              <ConfirmOrderButton onClick={navigateToConfirmOrder}>
+                CONFIRMAR PEDIDO
+              </ConfirmOrderButton>
             </OrderSummary>
           </CoffesSelectedContainer>
         </div>
