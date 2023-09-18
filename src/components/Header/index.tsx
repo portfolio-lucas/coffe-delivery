@@ -12,7 +12,11 @@ import { ModalCart } from "./components/ModalCart";
 import { useContext, useState } from "react";
 import { OrderContext } from "../../context/Order/OrderContext";
 
-export function Header() {
+interface HeaderProps {
+  success?: boolean;
+}
+
+export function Header({ success }: HeaderProps) {
   const { order } = useContext(OrderContext);
   const [openModal, setOpenModal] = useState(false);
 
@@ -26,33 +30,42 @@ export function Header() {
           <span>João Pessoa-PB</span>
         </Location>
 
-        <Dialog.Root
-          modal
-          open={openModal}
-          onOpenChange={() => {
-            if (order) {
-              setOpenModal(!openModal);
-            }
-          }}
-        >
-          <Dialog.Trigger asChild>
-            <CarButton>
-              <ShoppingCart size={22} color="orange" />
-              {order && (
-                <QuantityInCart>
-                  <p>{order.chosenProducts.length}</p>
-                </QuantityInCart>
-              )}
-            </CarButton>
-          </Dialog.Trigger>
+        {!success && (
+          <Dialog.Root
+            modal
+            open={openModal}
+            onOpenChange={() => {
+              if (order) {
+                setOpenModal(!openModal);
+              }
+            }}
+          >
+            <Dialog.Trigger asChild>
+              <CarButton>
+                <ShoppingCart size={22} color="orange" />
 
-          <Dialog.Portal>
-            <Dialog.Overlay className="DialogOverlay" />
-            <Dialog.Content>
-              <ModalCart />
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root>
+                {order && (
+                  <QuantityInCart>
+                    <p>{order.chosenProducts.length}</p>
+                  </QuantityInCart>
+                )}
+              </CarButton>
+            </Dialog.Trigger>
+
+            <Dialog.Portal>
+              <Dialog.Overlay className="DialogOverlay" />
+              <Dialog.Content>
+                <ModalCart />
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
+        )}
+
+        {success && (
+          <CarButton>
+            <ShoppingCart size={22} color="orange" />
+          </CarButton>
+        )}
       </ContentMain>
     </HeaderContainer>
   );
