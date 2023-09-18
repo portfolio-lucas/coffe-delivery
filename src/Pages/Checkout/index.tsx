@@ -52,7 +52,7 @@ export function Checkout() {
   } = useForm<FormData>({
     resolver: yupResolver(validation),
   });
-  const [deliveryPrice] = useState(3.3);
+  const [deliveryPrice, setDeliveryPrice] = useState(3.3);
   const [totalOrderPrice, setTotalOrderPrice] = useState(0);
   const onSubmit = (data: FormData) => console.log(data);
 
@@ -62,10 +62,17 @@ export function Checkout() {
 
   const calcTotalOrderPrice = useCallback(() => {
     const totalValue = calcTotalValue();
+    let totalOrder: number;
 
-    const totalOrder = totalValue + deliveryPrice;
-
-    setTotalOrderPrice(totalOrder);
+    if (Number(totalValue.toFixed(2)) > 50) {
+      setDeliveryPrice(0.0);
+      totalOrder = totalValue;
+      setTotalOrderPrice(totalOrder);
+    } else {
+      setDeliveryPrice(3.3);
+      totalOrder = totalValue + deliveryPrice;
+      setTotalOrderPrice(totalOrder);
+    }
   }, [deliveryPrice, calcTotalValue]);
 
   useEffect(() => {
@@ -220,7 +227,11 @@ export function Checkout() {
 
               <OrderTotalItems>
                 <span style={{ width: "150px" }}>Entrega</span>
-                <span>R$ {deliveryPrice.toFixed(2).replace(".", ",")}</span>
+                <span style={deliveryPrice === 0 ? { color: "#030" } : {}}>
+                  {deliveryPrice === 0
+                    ? "Entrega grátis"
+                    : `R$ ${deliveryPrice.toFixed(2).replace(".", ",")}`}
+                </span>
               </OrderTotalItems>
 
               <OrderTotalItems>
