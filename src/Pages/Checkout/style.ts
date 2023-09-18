@@ -18,7 +18,7 @@ export const CheckoutContainer = styled.div`
 
 export const CompleteOrder = styled.div`
   width: 640px;
-  heigth: 370px;
+  height: 500px;
   padding: 40px;
   background: #F3F2F2;
   border-radius: 6px;
@@ -34,33 +34,32 @@ export const CompleteOrder = styled.div`
     color: #574F4D;
   }
 
-  .errorMessage {
-    color: #B40404;
-    font-size: 12px;
-    font-weight: bold;
-    margin-top: 0.5rem;
-    margin-left: 2px;
-  }
-
-  input {
-    padding: 12px;
-    border: 1px solid #E6E5E5;
-    border-radius: 4px;
-    background: #EEEDED;
-  }
 
   .primaryBlock {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 12px;
 
     .cep {
       width: 200px;
     }
 
-    .road {
+    .address {
       width: 560px;
+    }
+
+      .block {
+        min-height: 70px;
+        display: flex;
+        flex-direction: column;
+
+        .errorMessage {
+          color: #B40404;
+          font-size: 12px;
+          font-weight: 500;
+          margin-top: 0.5rem;
+          margin-left: 2px;
+        } 
     }
   }
 
@@ -76,12 +75,28 @@ export const CompleteOrder = styled.div`
     .complement {
       width: 348px;
     }
+
+    .block {
+      height: 82px;
+      display: flex;
+      flex-direction: column;
+
+      .errorMessage {
+        color: #B40404;
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        margin-left: 2px;
+      } 
+    }
+
   }
 
   .thirdBlock {
     margin-top: 0.5rem;
+    max-width: 620px;
     display: flex;
-    justify-content: space-between;
+    gap: 12px;
 
     .neighborhood {
       width: 200px;
@@ -94,16 +109,42 @@ export const CompleteOrder = styled.div`
     .federativeUnit {
       width: 60px;
     }
+
+    .block {
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+
+      .errorMessage {
+        color: #B40404;
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        margin-left: 2px;
+      } 
+    }
+
   }
+`
+
+
+
+export const InputForm = styled.input`
+  padding: 12px;
+  border: 1px solid #E6E5E5;
+  border-radius: 4px;
+  background: #EEEDED;
+  height: 42px;
 `
 
 export const FormOfPayment = styled.div`
   width: 640px;
-  heigth: 205px;
+  height: 205px;
   padding: 40px;
   background: #F3F2F2;
   border-radius: 6px;
   margin-left: 3rem;
+  margin-bottom: 10px;
 
   span, p {
     font-size: 16px;
@@ -137,5 +178,97 @@ export const FormOfPayment = styled.div`
     margin-top: 2rem;
     display: flex;
     justify-content: space-between;
+  }
+`
+
+export const CoffesSelectedContainer = styled.div`
+    width: 448px;
+    height: 500px;
+    padding: 40px;
+    background: #F3F2F2;
+    border-radius: 6px;
+    border-top-right-radius: 44px;
+    margin-left: 3rem;
+
+    h1 {
+      margin-left: initial;
+    }
+`
+
+export const CoffesList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`
+
+export const Divisor = styled.div`
+  width: 100%;
+  border-bottom: 1px solid;
+  border-color: #e6e5e5;
+`
+
+export const CoffeItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 130%;
+    color: #574F4D;
+  }
+`
+
+export const BoxButton = styled.div`
+  height: 32px;
+  width: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: #e6e5e5;
+  border-radius: 6px;
+
+
+`
+
+export const QuantityButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #8047F8;
+  cursor: pointer;
+`
+
+export const RemoveButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  :hover {
+    background-color: #D8D8D8;
+  }
+`
+
+export const OrderSummary = styled.div`
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`
+
+export const OrderTotalItems = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    font-size: 14px;
+    line-height: 130%;
+    color: #574F4D;
   }
 `
