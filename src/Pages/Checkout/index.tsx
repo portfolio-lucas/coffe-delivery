@@ -6,17 +6,19 @@ import {
   CoffesList,
   CoffesSelectedContainer,
   CompleteOrder,
+  ConfirmOrderButton,
   Divisor,
   FormOfPayment,
   InputForm,
   OrderSummary,
   OrderTotalItems,
+  TextPrice,
 } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { OrderContext } from "../../context/Order/OrderContext";
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../../context/Products/ProductsContext";
 import Item from "./Item";
 
@@ -50,15 +52,26 @@ export function Checkout() {
   } = useForm<FormData>({
     resolver: yupResolver(validation),
   });
+  const [deliveryPrice] = useState(3.3);
+  const [totalOrderPrice, setTotalOrderPrice] = useState(0);
   const onSubmit = (data: FormData) => console.log(data);
 
   const { order } = useContext(OrderContext);
 
   const { calcTotalValue } = useContext(ProductsContext);
 
+  const calcTotalOrderPrice = useCallback(() => {
+    const totalValue = calcTotalValue();
+
+    const totalOrder = totalValue + deliveryPrice;
+
+    setTotalOrderPrice(totalOrder);
+  }, [deliveryPrice, calcTotalValue]);
+
   useEffect(() => {
     calcTotalValue();
-  }, [calcTotalValue]);
+    calcTotalOrderPrice();
+  }, [calcTotalValue, calcTotalOrderPrice]);
 
   return (
     <CheckoutContainer>
@@ -201,9 +214,23 @@ export function Checkout() {
 
             <OrderSummary>
               <OrderTotalItems>
-                <span>Total de itens</span>
+                <span style={{ width: "150px" }}>Total de itens</span>
                 <span>R$ {calcTotalValue().toFixed(2).replace(".", ",")}</span>
               </OrderTotalItems>
+
+              <OrderTotalItems>
+                <span style={{ width: "150px" }}>Entrega</span>
+                <span>R$ {deliveryPrice.toFixed(2).replace(".", ",")}</span>
+              </OrderTotalItems>
+
+              <OrderTotalItems>
+                <h1 style={{ width: "150px" }}>Total</h1>
+                <TextPrice>
+                  R$ {totalOrderPrice.toFixed(2).replace(".", ",")}
+                </TextPrice>
+              </OrderTotalItems>
+
+              <ConfirmOrderButton>CONFIRMAR PEDIDO</ConfirmOrderButton>
             </OrderSummary>
           </CoffesSelectedContainer>
         </div>

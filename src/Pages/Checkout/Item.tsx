@@ -24,10 +24,10 @@ const Item: React.FC<ItemProps> = ({ product }) => {
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "10rem",
+          gap: "8rem",
         }}
       >
-        <p>{product.title}</p>
+        <p style={{ width: "155px" }}>{product.title}</p>
         <span>R$ {product.price.toFixed(2)}</span>
       </div>
 

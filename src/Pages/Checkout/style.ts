@@ -183,7 +183,7 @@ export const FormOfPayment = styled.div`
 
 export const CoffesSelectedContainer = styled.div`
     width: 448px;
-    height: 500px;
+    min-height: 500px;
     padding: 40px;
     background: #F3F2F2;
     border-radius: 6px;
@@ -199,12 +199,8 @@ export const CoffesList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-`
-
-export const Divisor = styled.div`
-  width: 100%;
-  border-bottom: 1px solid;
-  border-color: #e6e5e5;
+  height: 300px;
+  overflow-y: auto;
 `
 
 export const CoffeItem = styled.div`
@@ -220,6 +216,12 @@ export const CoffeItem = styled.div`
   }
 `
 
+export const Divisor = styled.div`
+  width: 100%;
+  border-bottom: 1px solid;
+  border-color: #e6e5e5;
+`
+
 export const BoxButton = styled.div`
   height: 32px;
   width: 72px;
@@ -229,8 +231,6 @@ export const BoxButton = styled.div`
   gap: 12px;
   background-color: #e6e5e5;
   border-radius: 6px;
-
-
 `
 
 export const QuantityButton = styled.button`
@@ -239,6 +239,10 @@ export const QuantityButton = styled.button`
   font-size: 20px;
   color: #8047F8;
   cursor: pointer;
+
+  :hover {
+    background-color: #D8D8D8;
+  }
 `
 
 export const RemoveButton = styled.button`
@@ -264,11 +268,32 @@ export const OrderSummary = styled.div`
 
 export const OrderTotalItems = styled.div`
   display: flex;
-  justify-content: space-between;
+  gap: 8rem;
+
+
 
   span {
     font-size: 14px;
     line-height: 130%;
     color: #574F4D;
+  }
+`
+
+export const TextPrice = styled.h1`
+  font-size: 20px;
+  color: #574F4D;
+`
+
+export const ConfirmOrderButton = styled.button`
+  width: 100%;
+  padding: 12px 8px;
+  background-color: #DBAC2C;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  :hover {
+    background-color: #c47f17;
   }
 `
