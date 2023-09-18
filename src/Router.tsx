@@ -1,17 +1,16 @@
 import { Route, Routes } from "react-router-dom";
-
-import { Header } from "./components/Header";
 import { Checkout } from "./Pages/Checkout";
 import Home from "./Pages/Home";
+import Orders from "./Pages/Orders";
 
 export function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Home />}>
-        <Route path="/" element={<Header />} />
-      </Route>
+      <Route path="/" element={<Home />}></Route>
 
-      <Route path="/checkout/:id" element={<Checkout />} />
+      <Route path="/order/:id/new" element={<Orders />}></Route>
+
+      <Route path="/checkout/:id/finished" element={<Checkout />}></Route>
     </Routes>
   );
 }
