@@ -74,12 +74,13 @@ export function OrderProvider({ children }: OrderContextProviderProps) {
       const updateOrder = item.id === order.id;
 
       if (updateOrder) {
-        item.id = order.id;
+        item.client = order.client;
         item.chosenProducts = chosenProducts;
       }
-    });
 
-    setOrders([...orders]);
+      setOrder(item);
+      setOrders([...orders]);
+    });
   };
 
   const addOrderInOrdersList = (order: OrderProps) => {
@@ -96,6 +97,7 @@ export function OrderProvider({ children }: OrderContextProviderProps) {
     if (order) {
       const updateOrder: OrderProps = {
         id: order.id,
+        client: order.client,
         chosenProducts: chosenProducts,
       };
       setOrder(updateOrder);

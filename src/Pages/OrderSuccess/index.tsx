@@ -17,7 +17,7 @@ const OrderSuccess: React.FC = () => {
 
   return (
     <>
-      <Header />
+      <Header success />
 
       <OrderSuccessContent>
         <OrderConfirmInform>
@@ -48,9 +48,13 @@ const OrderSuccess: React.FC = () => {
                 }}
               >
                 <span>
-                  Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                  Entrega em{" "}
+                  <strong>{`${order?.client?.address} - ${order?.client?.number}`}</strong>
                 </span>
-                <span>Farrapos - Porto Alegre, RS</span>
+                <span>
+                  {order?.client?.district} - {order?.client?.city},{" "}
+                  {order?.client?.state}
+                </span>
               </div>
             </OrderDetails>
 
@@ -100,7 +104,13 @@ const OrderSuccess: React.FC = () => {
                 }}
               >
                 <span>Pagamento na entrega</span>
-                <strong>Cartão de crédito</strong>
+                <strong>
+                  {order?.client?.paymentMethod === "creditCard"
+                    ? "Cartão de crédito"
+                    : order?.client?.paymentMethod === "debitCard"
+                    ? "Cartão de débito"
+                    : "Dinheiro"}
+                </strong>
               </div>
             </OrderDetails>
           </OrderInformation>
