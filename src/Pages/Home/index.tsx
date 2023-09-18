@@ -1,19 +1,32 @@
 import React, { useContext } from "react";
 
-import { BoxCoffe } from "../../components/Coffes";
 import { Header } from "../../components/Header";
 import { Items } from "../../components/Items";
-import { HomeContainer, IntroContainer } from "./style";
+import { ButtonOrder, DoOrderContainer, IntroContainer } from "./style";
 import imageIntro from "../../assets/image-intro.svg";
 
 import { guarantees } from "../Home/lists";
-import { ProductsContext } from "../../context/Products/ProductsContext";
+import { ArrowBendDownRight } from "phosphor-react";
+import { OrderContext } from "../../context/Order/OrderContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-  const { products } = useContext(ProductsContext);
+  const { generateOrderId, setOrder } = useContext(OrderContext);
+
+  const navigate = useNavigate();
+
+  const goToNewOrder = () => {
+    const newOrderId = generateOrderId();
+
+    setOrder({
+      id: newOrderId,
+      chosenProducts: [],
+    });
+    navigate(`/order/${newOrderId}/new`);
+  };
 
   return (
-    <HomeContainer>
+    <div>
       <Header />
 
       <IntroContainer>
@@ -42,27 +55,12 @@ export default function Home() {
         <img src={imageIntro} alt="" />
       </IntroContainer>
 
-      <div className="coffes">
-        <h1>Nossos cafés</h1>
-
-        <div className="grid">
-          {products &&
-            products.map((product) => {
-              return (
-                <div key={product.id}>
-                  <BoxCoffe
-                    id={product.id}
-                    icon={product.icon}
-                    types={product.types}
-                    title={product.title}
-                    description={product.description}
-                    price={product.price}
-                  />
-                </div>
-              );
-            })}
-        </div>
-      </div>
-    </HomeContainer>
+      <DoOrderContainer>
+        <ButtonOrder onClick={goToNewOrder}>
+          <span>Faça seu pedido agora</span>
+          <ArrowBendDownRight size={24} weight="light" color="white" />
+        </ButtonOrder>
+      </DoOrderContainer>
+    </div>
   );
 }

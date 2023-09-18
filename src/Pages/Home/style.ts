@@ -1,28 +1,6 @@
 import styled from "styled-components";
 
-export const HomeContainer = styled.div`
-  margin-bottom: 30px;
-  height: 100%;
 
-  .coffes {
-    margin-top: 2rem;
-    margin-left: 150px;
-    display: flex;
-    flex-direction: column;
-    
-    h1 {
-      margin-top: 2rem;
-      margin-bottom: 54px;
-      color: #403937;
-    }
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-`
 export const IntroContainer = styled.div`
   display: flex;
   margin-top: 3.25rem;
@@ -78,4 +56,36 @@ export const IntroContainer = styled.div`
   }
 
 
+`
+
+export const DoOrderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  margin-top: 5%;
+  height: 60px;
+`
+
+export const ButtonOrder = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-block: 10px;
+  padding-inline: 14px;
+
+  background-color: #4b2995;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  span {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  :hover {
+    background-color: #805AD5;
+  }
 `

@@ -45,7 +45,7 @@ export interface CoffesProps {
   types?: TypesProps[];
   title?: string;
   description?: string;
-  quantity?: number;
+  quantity: number;
   price: number;
 }
 
@@ -59,6 +59,7 @@ export const coffes: CoffesProps[] = [
         description: "Tradicional",
       },
     ],
+    quantity: 1,
     title: "Expresso Tradicional",
     description: "O tradicional café feito com água quente e grãos moídos",
     price: 9.9,
@@ -72,6 +73,7 @@ export const coffes: CoffesProps[] = [
         description: "Americano",
       },
     ],
+    quantity: 1,
     title: "Expresso Americano",
     description: "O expresso americano feito com água quente e grãos moídos",
     price: 9.9,
@@ -85,6 +87,7 @@ export const coffes: CoffesProps[] = [
         description: "Gelado",
       },
     ],
+    quantity: 1,
     title: "Expresso Gelado",
     description: "O expresso gelado feito com água quente e grãos moídos",
     price: 9.9,
@@ -98,6 +101,7 @@ export const coffes: CoffesProps[] = [
         description: "Tradicional",
       },
     ],
+    quantity: 1,
     title: "Expresso Tradicional",
     description: "O tradicional café feito com água quente e grãos moídos",
     price: 9.9,
@@ -115,6 +119,7 @@ export const coffes: CoffesProps[] = [
         description: "Com leite",
       },
     ],
+    quantity: 1,
     title: "Café com Leite",
     description: "Meio a meio de expresso tradicional com leite vaporizado",
     price: 9.9,
@@ -132,6 +137,7 @@ export const coffes: CoffesProps[] = [
         description: "Com leite",
       },
     ],
+    quantity: 1,
     title: "Latte",
     description:
       "Uma dose de café expresso com dobro de leite e espuma cremosa",
@@ -150,6 +156,7 @@ export const coffes: CoffesProps[] = [
         description: "Com leite",
       },
     ],
+    quantity: 1,
     title: "Capuccino",
     description:
       "Bebida com canela feita de doses iguais de café, leite e espuma",
@@ -168,6 +175,7 @@ export const coffes: CoffesProps[] = [
         description: "Com leite",
       },
     ],
+    quantity: 1,
     title: "Macchiato",
     description:
       "Café expresso misturado com um pouco de leite quente e espuma",
@@ -186,6 +194,7 @@ export const coffes: CoffesProps[] = [
         description: "Com leite",
       },
     ],
+    quantity: 1,
     title: "Mocaccino",
     description: "Café expresso com calda de chocolate, pouco leite e espuma",
     price: 9.9,
