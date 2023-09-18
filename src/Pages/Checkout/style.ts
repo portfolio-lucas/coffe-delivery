@@ -18,7 +18,7 @@ export const CheckoutContainer = styled.div`
 
 export const CompleteOrder = styled.div`
   width: 640px;
-  height: 500px;
+  height: 700px;
   padding: 40px;
   background: #F3F2F2;
   border-radius: 6px;
@@ -138,6 +138,7 @@ export const InputForm = styled.input`
 `
 
 export const FormOfPayment = styled.div`
+  margin-top: -8rem;
   width: 640px;
   height: 205px;
   padding: 40px;
