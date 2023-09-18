@@ -6,65 +6,42 @@ import {
   TypesBox,
 } from "./style";
 import { ShoppingCart } from "phosphor-react";
-import { ReactElement, useContext, useState } from "react";
+import { ReactElement, useContext } from "react";
 import { useQuantity } from "../../Hooks/UseQuantity/useQuantity";
 import { ProductsContext } from "../../context/Products/ProductsContext";
+import { OrderContext } from "../../context/Order/OrderContext";
+import { CoffesProps } from "../../Pages/Home/lists";
 
 interface TypesProps {
   id: number;
   description: string;
 }
 
-interface CoffesProps {
-  id: number;
-  icon?: ReactElement;
-  types?: TypesProps[];
-  title?: string;
-  description?: string;
-  quantity?: number;
-  price: number;
+interface BoxCoffeProps {
+  coffe: CoffesProps;
+  quantity: number;
 }
 
-export function BoxCoffe({
-  id,
-  icon,
-  types,
-  title,
-  description,
-  quantity,
-  price,
-}: CoffesProps) {
+export function BoxCoffe({ coffe, quantity }: BoxCoffeProps) {
   const { quantityCoffe, increaseTheQuantity, decreaseTheQuantity } =
-    useQuantity();
+    useQuantity({
+      quantity,
+    });
 
+  let newPrice = coffe.price * quantityCoffe;
+
+  const { order } = useContext(OrderContext);
   const { addProductToShortlist } = useContext(ProductsContext);
-
-  let priceOfCoffe = price * quantityCoffe;
-
-  // função para adicionar o café no carrinho
-  const addCoffeInCar = () => {
-    const newCoffe: CoffesProps = {
-      id,
-      icon,
-      types,
-      title,
-      description,
-      quantity: quantityCoffe,
-      price: priceOfCoffe,
-    };
-
-    addProductToShortlist(newCoffe);
-  };
 
   return (
     <CoffeContainer>
       <>
-        {icon}
+        {coffe.icon}
 
         <div style={{ display: "flex" }}>
-          {types &&
-            types.length > 0 &&
-            types.map((item) => {
+          {coffe.types &&
+            coffe.types.length > 0 &&
+            coffe.types.map((item) => {
               return (
                 <TypesBox key={item.id}>
                   <h5>{item.description}</h5>
@@ -73,31 +50,41 @@ export function BoxCoffe({
             })}
         </div>
 
-        <h2>{title}</h2>
+        <h2>{coffe.title}</h2>
 
-        <p style={{ fontFamily: "Roboto" }}>{description}</p>
+        <p style={{ fontFamily: "Roboto" }}>{coffe.description}</p>
 
         <div>
           <div className="priceCoffe">
             <span>R$</span>
             <span className="price">
-              <strong>{priceOfCoffe.toFixed(2).replace(".", ",")}</strong>
+              <strong>{newPrice.toFixed(2).replace(".", ",")}</strong>
             </span>
           </div>
 
           <div className="addQuantity">
             <DecrementButton
               disabled={quantityCoffe === 1}
-              onClick={decreaseTheQuantity}
+              onClick={() => decreaseTheQuantity()}
             >
               -
             </DecrementButton>
             <span>{quantityCoffe}</span>
-            <IncrementButton onClick={increaseTheQuantity}>+</IncrementButton>
+            <IncrementButton onClick={() => increaseTheQuantity()}>
+              +
+            </IncrementButton>
           </div>
 
           <div className="marketCar">
-            <BtnCarCoffe onClick={addCoffeInCar}>
+            <BtnCarCoffe
+              onClick={() =>
+                addProductToShortlist({
+                  ...coffe,
+                  quantity: quantityCoffe,
+                  price: newPrice,
+                })
+              }
+            >
               <ShoppingCart size={22} weight="bold" color="#fff" />
             </BtnCarCoffe>
           </div>
