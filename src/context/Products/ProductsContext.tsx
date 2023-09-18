@@ -9,6 +9,7 @@ export interface ProductsContextProps {
   products: CoffesProps[];
   chosenProducts: CoffesProps[];
   addProductToShortlist: (product: CoffesProps) => void;
+  updateProductToShortList: (product: CoffesProps) => void;
   removeProductToShortlist: (product: CoffesProps) => void;
   removeAllProductsToShortList: () => void;
   calcTotalValue: () => number;
@@ -33,17 +34,20 @@ export function ProductsProvider({ children }: ProductsContextProviderProps) {
     setChosenProducts([...chosenProducts]);
   };
 
-  const addProductToShortlist = (product: CoffesProps) => {
-    const filterIfProductIsInTheList = chosenProducts.filter(
-      (item) => item.id === product.id
-    );
+  const addProductToShortlist = useCallback(
+    (product: CoffesProps) => {
+      const filterIfProductIsInTheList = chosenProducts.filter(
+        (item) => item.id === product.id
+      );
 
-    if (filterIfProductIsInTheList.length > 0) {
-      updateProductToShortList(product);
-    } else {
-      setChosenProducts([...chosenProducts, product]);
-    }
-  };
+      if (filterIfProductIsInTheList.length > 0) {
+        updateProductToShortList(product);
+      } else {
+        setChosenProducts([...chosenProducts, product]);
+      }
+    },
+    [chosenProducts]
+  );
 
   const removeProductToShortlist = (product: CoffesProps) => {
     const newList = chosenProducts.filter((item) => item.id !== product.id);
@@ -78,6 +82,7 @@ export function ProductsProvider({ children }: ProductsContextProviderProps) {
         products,
         chosenProducts,
         addProductToShortlist,
+        updateProductToShortList,
         removeProductToShortlist,
         removeAllProductsToShortList,
         calcTotalValue,
